@@ -19,8 +19,9 @@ tecs run
 The first `tecs` command downloads the LÖVE 12 runtime into your user cache;
 later commands reuse it. No Lua, LuaRocks, or compiler toolchain is required.
 
-## Updating the formula
+## Updates
 
-Releases of [tecs-cli](https://github.com/tecs-dev/tecs-cli) publish versioned
-archives (`tecs-cli-<version>.tar.gz`) with a `SHA256SUMS` file. To bump,
-update `url`/`sha256` in `Formula/tecs-cli.rb` accordingly.
+The Bump formula workflow polls
+[tecs-cli releases](https://github.com/tecs-dev/tecs-cli/releases) and
+rewrites the formula to each new release's `tecs-cli-<version>.tar.gz`,
+verifying the hash against the published `SHA256SUMS`.
