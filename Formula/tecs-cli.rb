@@ -4,25 +4,14 @@
 class TecsCli < Formula
   desc "Create, check, build, and run Tecs2D game projects"
   homepage "https://github.com/tecs-dev/tecs-cli"
-  version "0.1.0"
-  url "https://github.com/tecs-dev/tecs-cli/releases/download/v0.1.0/tecs"
-  sha256 "7aa977f11be5d6be28ecc02df93cdcb226fbd0ecaf63ea608d2937b2e576d4dd"
+  url "https://github.com/tecs-dev/tecs-cli/releases/download/v0.2.0/tecs-cli-0.2.0.tar.gz"
+  sha256 "04ef757a55d57b4baa897d61fef822fe188be9ce147a46d58c428556635dd6df"
   license "MIT"
 
-  resource "payload" do
-    url "https://github.com/tecs-dev/tecs-cli/releases/download/v0.1.0/tecs-cli.love"
-    sha256 "9e693b6f0dfc8de8f91500f9aacf7d6e1cb8fefd6a2b9490ccbda9b871534152"
-  end
-
   def install
-    # Release assets are served without an executable bit.
-    chmod 0755, "tecs"
-    libexec.install "tecs"
-    resource("payload").stage { libexec.install "tecs-cli.love" }
-    # The v0.1.0 launcher looks for the payload beside $0 without resolving
-    # symlinks, so point it at the payload explicitly. From v0.2.0 this can
-    # become a plain bin.install_symlink of the versioned release tarball.
-    (bin/"tecs").write_env_script libexec/"tecs", TECS_CLI_LOVE: libexec/"tecs-cli.love"
+    # The launcher resolves symlinks and finds tecs-cli.love beside itself.
+    libexec.install "tecs", "tecs-cli.love"
+    bin.install_symlink libexec/"tecs"
   end
 
   test do
