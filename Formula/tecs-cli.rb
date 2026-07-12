@@ -15,6 +15,8 @@ class TecsCli < Formula
   end
 
   def install
+    # Release assets are served without an executable bit.
+    chmod 0755, "tecs"
     libexec.install "tecs"
     resource("payload").stage { libexec.install "tecs-cli.love" }
     # The v0.1.0 launcher looks for the payload beside $0 without resolving
