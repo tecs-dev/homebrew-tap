@@ -4,8 +4,8 @@
 class TecsCli < Formula
   desc "Create, check, build, and run Tecs2D game projects"
   homepage "https://github.com/tecs-dev/tecs-cli"
-  url "https://github.com/tecs-dev/tecs-cli/releases/download/v0.8.0/tecs-cli-0.8.0.tar.gz"
-  sha256 "1b9f2b81f2d77131dc59b76128ee2fea84f3265fecd5325dde5a558cef8e9c44"
+  url "https://github.com/tecs-dev/tecs-cli/releases/download/v0.9.0/tecs-cli-0.9.0.tar.gz"
+  sha256 "7fecb95dffceda76f9dea56e914526fa43a0b5d6b9d618e68222f8b3611e06d0"
   license "MIT"
 
   def install
