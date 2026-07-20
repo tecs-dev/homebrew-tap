@@ -3,9 +3,9 @@
 # the user cache on first run; no Lua toolchain is required.
 class TecsCli < Formula
   desc "Create, check, build, and run Tecs2D game projects"
-  homepage "https://github.com/tecs-dev/tecs-cli"
-  url "https://github.com/tecs-dev/tecs-cli/releases/download/v0.10.9/tecs-cli-0.10.9.tar.gz"
-  sha256 "8223e7a5d4160b7464e6097e89f745fbb113ceb6cf8f245b46a915b71442691b"
+  homepage "https://github.com/tecs-dev/tecs"
+  url "https://github.com/tecs-dev/tecs/releases/download/v0.10.10/tecs-cli-0.10.10.tar.gz"
+  sha256 "777a551643b029ea1d93101530100c104641e2c22d0d26f63a6c742d86eced83"
   license "MIT"
 
   def install

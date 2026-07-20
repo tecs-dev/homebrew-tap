@@ -1,4 +1,4 @@
-# Keeps the formula current: polls tecs-cli GitHub releases and rewrites the
+# Keeps the formula current: polls shared Tecs GitHub releases and rewrites the
 # formula's url/sha256 to the latest versioned tarball, verified against the
 # release's SHA256SUMS. The Scoop bucket's Excavator workflow is the
 # equivalent on the Windows side.
@@ -21,21 +21,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Update formula to the latest tecs-cli release
+      - name: Update formula to the latest Tecs release
         run: |
           set -euo pipefail
-          latest=$(gh release view --repo tecs-dev/tecs-cli --json tagName --jq .tagName)
+          latest=$(gh release view --repo tecs-dev/tecs --json tagName --jq .tagName)
           version="${latest#v}"
           current=$(sed -n 's|.*releases/download/v\([0-9][^/]*\)/.*|\1|p' Formula/tecs-cli.rb | head -1)
           if [ "$version" = "$current" ]; then
             echo "Formula already at $version"
             exit 0
           fi
-          sha=$(curl -fsSL "https://github.com/tecs-dev/tecs-cli/releases/download/$latest/SHA256SUMS" \
+          sha=$(curl -fsSL "https://github.com/tecs-dev/tecs/releases/download/$latest/SHA256SUMS" \
             | awk -v f="tecs-cli-$version.tar.gz" '$2 == f {print $1}')
           test -n "$sha"
           sed -i \
-            -e "s|releases/download/v[^/]*/tecs-cli-[0-9][^\"]*\.tar\.gz|releases/download/$latest/tecs-cli-$version.tar.gz|" \
+            -e "s|github.com/tecs-dev/[^/]*/releases/download/v[^/]*/tecs-cli-[0-9][^\"]*\.tar\.gz|github.com/tecs-dev/tecs/releases/download/$latest/tecs-cli-$version.tar.gz|" \
             -e "s|sha256 \".*\"|sha256 \"$sha\"|" \
             Formula/tecs-cli.rb
           git config user.name "github-actions[bot]"
